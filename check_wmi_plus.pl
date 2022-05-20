@@ -56,6 +56,7 @@ use Data::Dumper;
 use Storable;
 use Config::IniFiles;
 use DateTime;
+use Socket;
 
 # command line option declarations
 our $opt_auth_file='';
@@ -919,6 +920,10 @@ if (! -x $wmic_command) {
 }
 
 $use_pro_library && endtimer('Preparation');
+
+# get ipaddress from hostname
+my $IPaddress = inet_ntoa(inet_aton($the_arguments{'_host'}));
+$the_arguments{'_host'}=$IPaddress;
 
 # save the mode and submode
 $the_arguments{'_mode'}=$opt_mode;
