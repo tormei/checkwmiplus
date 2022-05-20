@@ -5353,7 +5353,7 @@ foreach my $row (@{$collected_data[$last_wmi_data_index]}) {
    $debug && print "Checking if '$$row{'DeviceID'}'=~/$the_arguments{'_arg1'}/i || '$$row{'Label'}'=~/$the_arguments{'_arg1'}/i || '$$row{'Name'}'=~/$the_arguments{'_arg1'}/i || ('$$row{'DeviceID'}' eq '$alldisk_identifier' && '$the_arguments{'_arg3'}')\n";
    if ($$row{'DeviceID'}=~/$the_arguments{'_arg1'}/i || $$row{'Label'}=~/$the_arguments{'_arg1'}/i || $$row{'Name'}=~/$the_arguments{'_arg1'}/i || ($$row{'DeviceID'} eq $alldisk_identifier && $the_arguments{'_arg3'}) ) {
       # include this drive in the results
-      if ($$row{'Capacity'}>0 && $the_arguments{'_ignorezerosizedrives'}) {
+      if ($$row{'Capacity'}>0 && $the_arguments{'_ignorezerosizedrives'} || $$row{'Label'} eq '(null)') {
          $debug && print "Volume $$row{'DeviceID'}, $$row{'Label'}, $$row{'Name'} was included but has capacity of zero, so ignoring it\n";
       } else {
          # got valid data
